@@ -89,18 +89,6 @@
     if (field && typeof field.focus === 'function') field.focus();
   }
 
-  async function postJSON(url, payload) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    let data = {};
-    try { data = await res.json(); } catch (_) { /* no body */ }
-    if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
-    return data;
-  }
-
   /* booking */
   const bookingForm = $('#booking-form');
   const bookingStatus = $('#booking-status');
@@ -184,12 +172,12 @@
     boothAudio.addEventListener('ended', () => paint(false));
   }
 
-  /* newsletter */
+  /* newsletter — hands the address to WhatsApp, no server involved */
   const newsForm = $('#news-form');
   const newsStatus = $('#news-status');
 
   if (newsForm) {
-    newsForm.addEventListener('submit', async (e) => {
+    newsForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const emailInput = $('input[name="email"]', newsForm);
       const email = String(emailInput ? emailInput.value : '').trim();
@@ -202,19 +190,11 @@
         return;
       }
 
-      setStatus(newsStatus, 'Adding you…', true);
-      if (btn) btn.disabled = true;
+      const text = `Add me to the FrenchKiss DJ list — ${email}`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
 
-      try {
-        await postJSON('/api/newsletter', { email });
-        newsForm.reset();
-        if (label) label.textContent = 'You’re in ✓';
-        setStatus(newsStatus, 'You’re on the list. Watch your inbox for the next drop.', true);
-      } catch (err) {
-        setStatus(newsStatus, err.message);
-      } finally {
-        if (btn) btn.disabled = false;
-      }
+      if (label) label.textContent = 'Send again ↗';
+      setStatus(newsStatus, 'WhatsApp is open with your address — hit send and you\u2019re on the list.', true);
     });
   }
 })();
