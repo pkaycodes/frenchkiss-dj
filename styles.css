@@ -458,12 +458,32 @@ h2 em{
 }
 .vote-panel{
   display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
-  gap:clamp(1.8rem,4vw,3.6rem);
-  align-items:center;
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  grid-template-areas:
+    "flyer copy"
+    "flyer dial";
+  gap:clamp(1.6rem,3vw,2.4rem) clamp(1.8rem,3.4vw,3rem);
+  align-items:start;
   padding:clamp(1.3rem,2.8vw,2.4rem);
   border:1px solid var(--line-strong);
   background:linear-gradient(150deg,rgba(242,237,228,.055),rgba(242,237,228,.012));
+}
+.vote-copy{grid-area:copy}
+.vote-dial{grid-area:dial}
+.vote-flyer{
+  grid-area:flyer;
+  align-self:center;
+  margin:0;
+}
+.vote-flyer img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--line-strong);
+  background:var(--ink-2);
+}
+.vote-flyer figcaption{
+  margin-top:.6rem;
+  font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);
 }
 .vote-kicker{
   display:inline-flex;align-items:center;gap:.6rem;
@@ -959,7 +979,12 @@ h2 em{
 
 
 
-  .vote-panel{grid-template-columns:1fr;align-items:start}
+  .vote-panel{
+    grid-template-columns:1fr;
+    grid-template-areas:"copy" "flyer" "dial";
+    align-items:start;
+  }
+  .vote-flyer{max-width:26rem}
 
   .booking-grid{grid-template-columns:1fr}
   .newsletter-inner{grid-template-columns:1fr;align-items:start}
@@ -984,6 +1009,7 @@ h2 em{
   .vote-facts{grid-template-columns:1fr 1fr;gap:.9rem}
   .vote-facts div:last-child{grid-column:1 / -1}
   .vote-code{font-size:clamp(2rem,10.5vw,2.8rem)}
+  .vote-flyer{max-width:none}
 
   .date-item{grid-template-columns:3.6rem 1fr;row-gap:.5rem}
   .date-status{grid-column:2;justify-self:start}
