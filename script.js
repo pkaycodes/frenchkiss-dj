@@ -139,6 +139,52 @@
     });
   }
 
+  /* ── vote: copy the USSD dial code ───────────────────── */
+  const voteCopy = $('.vote-dial-btn');
+  const voteStatus = $('#vote-status');
+
+  if (voteCopy) {
+    voteCopy.addEventListener('click', async () => {
+      const dial = voteCopy.dataset.dial || '*920*5*50#';
+      const code = voteCopy.dataset.code || 'DJ412';
+      const label = $('.btn-label', voteCopy);
+
+      const fine = () => {
+        voteCopy.classList.add('is-done');
+        if (label) label.textContent = 'Copied';
+        setStatus(voteStatus, `${dial} copied — dial it and enter ${code}.`, true);
+      };
+
+      const legacyCopy = (text) => {
+        const tmp = document.createElement('textarea');
+        tmp.value = text;
+        tmp.setAttribute('readonly', '');
+        tmp.style.position = 'fixed';
+        tmp.style.top = '0';
+        tmp.style.left = '-9999px';
+        document.body.appendChild(tmp);
+        tmp.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
+        tmp.remove();
+        return ok;
+      };
+
+      let copied = false;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(dial);
+          copied = true;
+        }
+      } catch (_) { copied = false; }
+
+      if (!copied) copied = legacyCopy(dial);
+
+      if (copied) fine();
+      else setStatus(voteStatus, `Dial ${dial} and enter code ${code}.`);
+    });
+  }
+
   /* ── booth sound (opt-in) ────────────────────────────── */
   const soundBtn = $('#sound-btn');
   const boothAudio = $('#booth-audio');

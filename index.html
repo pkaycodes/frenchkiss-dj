@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=14">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body id="top">
@@ -38,6 +38,7 @@
     <nav class="main-nav" id="main-nav" aria-label="Primary">
       <a href="#listen"><span>01</span>Listen</a>
       <a href="#about"><span>02</span>About</a>
+      <a class="nav-vote" href="#vote"><i aria-hidden="true"></i>Vote</a>
       <a class="nav-cta" href="#booking">Booking <span aria-hidden="true">↗</span></a>
     </nav>
 
@@ -95,6 +96,36 @@
       <span>Amapiano</span><i>✶</i><span>Afrobeats</span><i>✶</i><span>Afro-house</span><i>✶</i><span>Dancehall</span><i>✶</i><span>Hip-hop</span><i>✶</i><span>R&amp;B</span><i>✶</i>
     </div>
   </div>
+
+  <!-- ───────────────────────── vote ───────────────────────── -->
+  <section class="vote" id="vote" aria-labelledby="vote-title">
+    <div class="wrap">
+      <div class="vote-panel">
+        <div class="vote-copy">
+          <p class="vote-kicker"><span class="vote-dot" aria-hidden="true"></span>Ghana DJ Awards 2026 &middot; Voting live</p>
+          <h2 id="vote-title">Nominated for <em>House DJ</em> of the year.</h2>
+          <p class="vote-lede">FrenchKiss is up for House DJ of the Year at the Ghana DJ Awards. Voting runs until the ceremony on Friday 4 December at The Palms Convention Centre — dial in and put the code through.</p>
+
+          <dl class="vote-facts">
+            <div><dt>Nominee code</dt><dd>DJ412</dd></div>
+            <div><dt>Category</dt><dd>House DJ of the Year</dd></div>
+            <div><dt>Ceremony</dt><dd>Fri 4 Dec &middot; 7pm<br>The Palms, Accra</dd></div>
+          </dl>
+        </div>
+
+        <div class="vote-dial">
+          <p class="vote-dial-label">To vote, dial</p>
+          <p class="vote-code">*920*5*<span>50</span>#</p>
+          <p class="vote-code-note">Enter nominee code <b>DJ412</b> when asked.</p>
+          <button class="btn btn-primary vote-dial-btn" type="button" data-dial="*920*5*50#" data-code="DJ412">
+            <span class="btn-label">Copy dial code</span>
+            <span aria-hidden="true">⧉</span>
+          </button>
+          <p class="vote-status" id="vote-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ───────────────────────── listen ───────────────────────── -->
   <section class="section listen" id="listen">
@@ -340,6 +371,6 @@
 <audio id="booth-audio" src="assets/audio/booth.m4a" preload="none" loop></audio>
 <p class="sr-only" id="sound-note">Plays a short clip of FrenchKiss DJ mixing in the booth. Tap again to turn it off.</p>
 
-<script src="script.js?v=13"></script>
+<script src="script.js?v=14"></script>
 </body>
 </html>
