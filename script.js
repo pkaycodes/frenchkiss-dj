@@ -139,6 +139,29 @@
     });
   }
 
+  /* copy text to the clipboard, with a legacy fallback */
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (_) { /* fall through */ }
+
+    const tmp = document.createElement('textarea');
+    tmp.value = text;
+    tmp.setAttribute('readonly', '');
+    tmp.style.position = 'fixed';
+    tmp.style.top = '0';
+    tmp.style.left = '-9999px';
+    document.body.appendChild(tmp);
+    tmp.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
+    tmp.remove();
+    return ok;
+  }
+
   /* ── vote: copy the USSD dial code ───────────────────── */
   const voteCopy = $('.vote-copy-btn');
   const voteStatus = $('#vote-status');
@@ -155,33 +178,46 @@
         setStatus(voteStatus, `${dial} copied — dial it and enter ${code}.`, true);
       };
 
-      const legacyCopy = (text) => {
-        const tmp = document.createElement('textarea');
-        tmp.value = text;
-        tmp.setAttribute('readonly', '');
-        tmp.style.position = 'fixed';
-        tmp.style.top = '0';
-        tmp.style.left = '-9999px';
-        document.body.appendChild(tmp);
-        tmp.select();
-        let ok = false;
-        try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
-        tmp.remove();
-        return ok;
-      };
-
-      let copied = false;
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(dial);
-          copied = true;
-        }
-      } catch (_) { copied = false; }
-
-      if (!copied) copied = legacyCopy(dial);
+      const copied = await copyText(dial);
 
       if (copied) fine();
       else setStatus(voteStatus, `Dial ${dial} and enter code ${code}.`);
+    });
+  }
+
+  /* ── vote page: share / copy the link ────────────────── */
+  const shareBtn = $('#share-btn');
+  const copyLinkBtn = $('#copy-link-btn');
+  const shareStatus = $('#share-status');
+  const shareCopy = 'Vote FrenchKiss for House DJ of the Year at the Ghana DJ Awards 2026 — dial *920*5*50# and enter DJ412.';
+  const pageUrl = () => window.location.href.split('#')[0];
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const url = pageUrl();
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'Vote FrenchKiss — House DJ of the Year', text: shareCopy, url });
+          return;
+        } catch (_) { /* cancelled or blocked — copy instead */ }
+      }
+
+      const ok = await copyText(`${shareCopy} ${url}`);
+      setStatus(
+        shareStatus,
+        ok ? 'Link copied — paste it into WhatsApp, X or anywhere else.' : `Share this page: ${url}`,
+        ok
+      );
+    });
+  }
+
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', async () => {
+      const url = pageUrl();
+      const ok = await copyText(url);
+      if (ok) copyLinkBtn.textContent = 'Link copied ✓';
+      setStatus(shareStatus, ok ? `Copied — ${url}` : `Copy this link: ${url}`, ok);
     });
   }
 
