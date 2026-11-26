@@ -512,7 +512,15 @@ h2 em{
 .vote-code-note{margin-top:.6rem;font-size:.8rem;font-weight:300;line-height:1.5;color:rgba(242,237,228,.7)}
 .vote-code-note b{color:var(--bone);font-weight:500;letter-spacing:.06em}
 .vote-dial-btn{width:100%;margin-top:1.15rem;justify-content:space-between}
-.vote-dial-btn.is-done{background:var(--bone);color:var(--ink)}
+.vote-copy-btn{
+  display:block;width:100%;margin-top:.75rem;padding:.4rem 0;
+  background:none;border:0;border-bottom:1px solid var(--line-strong);
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bone-dim);text-align:left;cursor:pointer;
+  transition:color .3s var(--ease),border-color .3s var(--ease);
+}
+.vote-copy-btn:hover{color:var(--red);border-color:var(--red)}
+.vote-copy-btn.is-done{color:#8FD6A0;border-color:rgba(143,214,160,.5)}
 .vote-status{margin-top:.6rem;font-size:.72rem;line-height:1.5;color:var(--red);min-height:1.1em}
 .vote-status.ok{color:#8FD6A0}
 

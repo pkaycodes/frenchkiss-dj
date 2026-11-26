@@ -140,18 +140,18 @@
   }
 
   /* ── vote: copy the USSD dial code ───────────────────── */
-  const voteCopy = $('.vote-dial-btn');
+  const voteCopy = $('.vote-copy-btn');
   const voteStatus = $('#vote-status');
 
   if (voteCopy) {
     voteCopy.addEventListener('click', async () => {
       const dial = voteCopy.dataset.dial || '*920*5*50#';
       const code = voteCopy.dataset.code || 'DJ412';
-      const label = $('.btn-label', voteCopy);
+      const label = $('.copy-label', voteCopy);
 
       const fine = () => {
         voteCopy.classList.add('is-done');
-        if (label) label.textContent = 'Copied';
+        if (label) label.textContent = `${dial} copied`;
         setStatus(voteStatus, `${dial} copied — dial it and enter ${code}.`, true);
       };
 
