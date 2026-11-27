@@ -619,30 +619,10 @@ h2 em{
 .step p b{color:var(--bone);font-weight:500;letter-spacing:.04em}
 .vpage-back{margin-top:clamp(2rem,4vw,3rem)}
 
-/* ── shows ───────────────────────────────────────────────── */
+/* ── events page ─────────────────────────────────────────── */
 
-.show{
-  position:relative;
-  padding:clamp(2.8rem,5vw,4.2rem) 0;
-  border-bottom:1px solid var(--line);
-}
-.show-grid{
-  display:grid;
-  grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);
-  gap:clamp(1.6rem,4vw,3.4rem);
-  align-items:center;
-}
-.show-poster{margin:0}
-.show-poster img{
-  width:100%;height:auto;
-  border:1px solid var(--line-strong);
-  background:var(--ink-2);
-}
-.show-poster figcaption{
-  margin-top:.6rem;
-  font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);
-}
+.epage-more{padding-top:clamp(3rem,5.5vw,4.5rem)}
+.epage-more h2{margin-top:.9rem}
 .show-kicker{
   display:inline-flex;align-items:center;gap:.6rem;
   font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
@@ -654,7 +634,6 @@ h2 em{
   box-shadow:0 0 0 0 rgba(255,59,38,.55);
   animation:pulse 2.4s infinite;
 }
-.show h2{margin-top:.9rem;font-size:clamp(2.1rem,4.4vw,3.4rem);max-width:18ch}
 .show-lede{
   margin-top:1rem;max-width:34rem;
   font-size:.94rem;font-weight:300;line-height:1.75;
@@ -1134,8 +1113,6 @@ h2 em{
   .vpage-copy .vote-facts{max-width:none}
   .steps{grid-template-columns:1fr;gap:1.4rem}
 
-  .show-grid{grid-template-columns:1fr;gap:1.5rem}
-  .show-poster{max-width:22rem}
 
   .booking-grid{grid-template-columns:1fr}
   .newsletter-inner{grid-template-columns:1fr;align-items:start}
@@ -1161,7 +1138,6 @@ h2 em{
   .vote-facts div:last-child{grid-column:1 / -1}
   .vote-code{font-size:clamp(2rem,10.5vw,2.8rem)}
   .vote-flyer{max-width:none}
-  .show-poster{max-width:none}
   .show-facts{grid-template-columns:1fr;gap:.9rem}
 
   .date-item{grid-template-columns:3.6rem 1fr;row-gap:.5rem}
